@@ -1,0 +1,16 @@
+db/
+incremental_db/
+simulation/
+greybox_tmp/
+hc_output/
+*.rpt
+*.summary
+*.sof
+*.pof
+*.jdi
+*.pin
+*.done
+*.qws
+*.bak
+/hc_output/
+/sys_description/
