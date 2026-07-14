@@ -12,7 +12,7 @@ module LogicalStep_Lab2_top
 );
 
 //these are used as intermediate signals
-	wire pb_step, pb_auto, pulse_step, pulse_auto, tick;
+	wire pb_step, pb_auto, pulse_step, pulse_auto, clk_out, load_en, step_en;
 	wire [3:0] hex, pb;
 	wire [7:0] byte, next_term, term_count;
 	wire [2:0] fsm_state;
@@ -71,7 +71,9 @@ module LogicalStep_Lab2_top
 		 .clk_divider_tick (clk_out),
 		 .current_term (current_term),
 		 .term_count (term_count),
-		 .fsm_state (fsm_state)
+		 .fsm_state (fsm_state),
+		 .load_en (load_en),
+		 .step_en (step_en)
 	);
 	
 	collatz_calculator u7 (
@@ -79,22 +81,18 @@ module LogicalStep_Lab2_top
 		.next_term (next_term)
 	);
 	
-	always @(posedge clkin_50) begin
-		case (fsm_state)
-			3'b00: current_term <= byte;
-			3'b010: current_term <= next_term;
-			3'b011: begin 
-							if (clk_out) begin
-								current_term <= next_term;
-							end
-						   else begin
-								current_term <= current_term;
-							end
-					  end
-			default: current_term <= current_term;
-		endcase
+	always @(posedge clkin_50 or negedge rst_n) begin
+		if (!rst_n) begin
+			current_term <= 8'd0;
+		end else begin
+			if (load_en) begin
+				current_term <= byte;
+			end else if (step_en) begin
+				current_term <= next_term;
+			end
+		end
 	end
-	
+
 	assign leds = current_term;
 	
 	SevenSegment u8 (

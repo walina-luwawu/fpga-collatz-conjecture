@@ -5,7 +5,9 @@ module collatz_fsm
     input [7:0] current_term,
 	 
     output [2:0] fsm_state,
-	 output [7:0] term_count
+	 output [7:0] term_count,
+	 output reg load_en,
+	 output reg step_en
 );
 //define states
     localparam STATE_IDLE = 3'b000,
@@ -17,11 +19,16 @@ module collatz_fsm
     reg [2:0] current_state; 
     reg [2:0] next_state;
     reg [7:0] tc;
-	 
+	
 //find the next state from the current state and input pulses
     always @(*) begin
+		 load_en = 1'b0;
+		 step_en = 1'b0;
+	 
         case (current_state)
             STATE_IDLE: begin
+					load_en = 1'b1;
+					
                 if (pulse_step & ~pulse_auto)
 						next_state = STATE_STEP;
                 else if (pulse_auto & ~pulse_step) 
@@ -40,12 +47,18 @@ module collatz_fsm
 						next_state = STATE_HOLD;
             end
             STATE_STEP: begin
+					step_en = 1'b1;
+					
                 if (current_term == 8'd1)
 						next_state = STATE_DONE;
                 else
 						next_state = STATE_HOLD;
             end
             STATE_AUTO: begin
+					 if (clk_divider_tick) begin
+                    step_en = 1'b1; 
+                end
+					 
                 if (current_term == 8'd1)
 						next_state = STATE_DONE;
                 else 
