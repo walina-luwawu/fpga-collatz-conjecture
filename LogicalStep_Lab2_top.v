@@ -60,7 +60,7 @@ module LogicalStep_Lab2_top
 	clock_divider u5 (
 		.rst_n (rst_n),
 		.clk (clkin_50),
-		.tick (tick)
+		.clk_out (clk_out)
 	);
 	
 	collatz_fsm u6 (
@@ -68,7 +68,7 @@ module LogicalStep_Lab2_top
 		 .pulse_auto (pulse_auto),
 		 .rst_n (rst_n),
 		 .clk (clkin_50),
-		 .clk_divider_tick (tick),
+		 .clk_divider_tick (clk_out),
 		 .current_term (current_term),
 		 .term_count (term_count),
 		 .fsm_state (fsm_state)
@@ -84,7 +84,7 @@ module LogicalStep_Lab2_top
 			3'b00: current_term <= byte;
 			3'b010: current_term <= next_term;
 			3'b011: begin 
-							if (tick) begin
+							if (clk_out) begin
 								current_term <= next_term;
 							end
 						   else begin
