@@ -1,4 +1,4 @@
-# Collatz Conjecture
+# FPGA Collatz Conjecture
 
 A hardware implementation of the Collatz conjecture for 8-bit numbers (supporting sequence values from 0 to 255).
 
@@ -43,11 +43,12 @@ cd collatz-conjecture
 * Go to `File` > `Open Project` and select `LogicalStep_Lab2.qpf`
 
 #### 3. Run Pin Assignments
-* Run the TCL script via `Tools` > `Run TCL Scripts`, select `LogicalStep_Lab2.tcl`, and click Run
+* Run the TCL script via `Tools` > `Run TCL Scripts`
+* Select `LogicalStep_Lab2.tcl` and click Run
 
 #### 4. Compile Design
 
-* Click Start Compilation (or press Ctrl + L) to perform synthesis, placement, and routing
+* Click Start Compilation (or press Ctrl + L) to synthesize, place, and route the design
 
 #### 5. Program the Board
 
