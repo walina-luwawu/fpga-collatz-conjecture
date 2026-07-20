@@ -4,7 +4,7 @@ A hardware implementation of the Collatz conjecture for 8-bit numbers (supportin
 
 ## Toolchain
 
-* Target Chip: Altera MAX 10 (10M16SAU169C8G)
+* Target Chip: Altera MAX 10 (10M08SAE144C8G)
 * Target Board: University of Waterloo LogicalStep Board
 * Development Software: Intel Quartus Prime (Lite Edition)
 
