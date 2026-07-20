@@ -21,7 +21,8 @@ module collatz_calculator
 
 //next term is n/2 if the current term is even
 //otherwise next term is 3n + 1
-	assign next_term = (~current_term[0]) ? {1'b0, current_term[7:1]} : sum;
+	assign next_term = (current_term == 8'd1) ? 8'd1 :
+							 (~current_term[0])     ? {1'b0, current_term[7:1]} : sum;
 	
 endmodule
 								

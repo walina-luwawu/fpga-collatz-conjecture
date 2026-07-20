@@ -1,7 +1,6 @@
 module clock_divider
 (
 	input clk, rst_n,
-	
 	output reg clk_out
 );
 //decrease clock frequency to 1 Hz 
