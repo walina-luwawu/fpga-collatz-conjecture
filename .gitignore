@@ -1,8 +1,7 @@
 db/
 incremental_db/
 simulation/
-greybox_tmp/
-hc_output/
+output_files/
 *.rpt
 *.summary
 *.sof
@@ -11,6 +10,5 @@ hc_output/
 *.pin
 *.done
 *.qws
+*.qdf
 *.bak
-/hc_output/
-/sys_description/
